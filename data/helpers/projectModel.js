@@ -5,5 +5,13 @@ module.exports = {
 }
 
 function getProjects() {
-    return '';
-}
+    return db('projects')
+            .then(projects => {
+               return projects.map(project => {
+                   return {
+                       ...project,
+                       completed: project.completed ? true : false
+                   };
+               });
+            });
+};

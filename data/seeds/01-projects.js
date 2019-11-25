@@ -8,7 +8,7 @@ exports.seed = function (knex, Promise) {
     {
       name: 'Create a React App',
       description: 'Make an amazing ToDo App',
-      completed: 0
+      completed: 1
     }
   ]);
 };
