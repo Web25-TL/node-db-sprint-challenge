@@ -19,5 +19,32 @@ router.get('/', (req, res) => {
            });
 });
 
+router.post('/', (req, res) => {
+    const project = req.body;
+
+    Project.addProject(project)
+           .then(addedProject => {
+               res.status(201).json(addedProject);
+           })
+           .catch(err => {
+               res.status(500).json({
+                   message: 'An error occurred while trying to add the project to the database',
+                   error: err
+               });
+           }); 
+});
+
+
+function validateBody(req, res, next) { // TODO why isnt this working?
+    const { name } = req.body;
+
+    if(Object.entries(req.body.length === 0)) {
+        res.status(400).json({ message: 'No body data was found.' });
+    } else if(!name) {
+        res.status(400).json({ message: 'No name field was found on the body.' });
+    } else {
+        next();
+    }
+}
 
 module.exports = router;
