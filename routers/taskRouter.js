@@ -19,19 +19,6 @@ router.get('/', (req, res) => {
            });
 });
 
-router.post('/', (req, res) => {
-    const task = req.body;
 
-    Task.addTask(task)
-           .then(addedTask => {
-               res.status(201).json(addedTask);
-           })
-           .catch(err => {
-               res.status(500).json({
-                   message: 'An error occurred while trying to add the task to the database',
-                   error: err
-               });
-           }); 
-});
 
 module.exports = router;

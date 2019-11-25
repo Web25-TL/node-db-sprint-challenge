@@ -5,6 +5,7 @@ const cors = require('cors');
 // import routers
 const projectRouter = require('./routers/projectRouter.js');
 const resourceRouter = require('./routers/resourceRouter.js');
+const taskRouter = require('./routers/taskRouter.js');
 
 const server = express();
 
@@ -17,6 +18,7 @@ server.use(cors());
 // use routers here
 server.use('/api/projects', projectRouter);
 server.use('/api/resources', resourceRouter);
+server.use('/api/tasks', taskRouter);
 
 server.get('/', (req, res) => {
     res.send(`<h2>Welcome to the Projects API!</h2>`)
