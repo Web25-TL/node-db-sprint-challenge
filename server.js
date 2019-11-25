@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 // import routers
-
+const projectRouter = require('./routers/projectRouter.js');
 
 const server = express();
 
@@ -13,8 +13,8 @@ server.use(express.json());
 server.use(logger);
 server.use(cors());
 
-
 // use routers here
+server.use('/api/projects', projectRouter);
 
 server.get('/', (req, res) => {
     res.send(`<h2>Welcome to the Projects API!</h2>`)
