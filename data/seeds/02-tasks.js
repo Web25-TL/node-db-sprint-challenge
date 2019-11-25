@@ -1,13 +1,29 @@
-
-exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
-      ]);
-    });
+exports.seed = function (knex, Promise) {
+  // Inserts seed entries
+  return knex('tasks').insert([{
+      description: 'learn SQL',
+      notes: 'try to google stuff',
+      completed: 0,
+      project_id: 1
+    },
+    {
+      description: 'learn relational databases',
+      notes: '',
+      completed: 0,
+      project_id: 1
+    },
+    {
+      description: 'learn react',
+      notes: 'check out the react docs',
+      completed: 0,
+      project_id: 2
+    },
+    {
+      description: 'make a form using formik',
+      notes: 'study state management',
+      completed: 0,
+      project_id: 2
+    }
+  ]);
 };
+

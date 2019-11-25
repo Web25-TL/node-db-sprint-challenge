@@ -22,7 +22,7 @@ exports.up = function(knex) {
             .createTable('project_resources', tbl => {
                 tbl.increments();
                 tbl.integer('project_id').unsigned().notNullable().references('projects.id').onDelete('CASCADE').onUpdate('CASCADE');
-                tbl.integer('project_id').unsigned().notNullable().references('resources.id').onDelete('CASCADE').onUpdate('CASCADE');
+                tbl.integer('resource_id').unsigned().notNullable().references('resources.id').onDelete('CASCADE').onUpdate('CASCADE');
             });
 };
 
