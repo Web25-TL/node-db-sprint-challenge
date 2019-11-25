@@ -19,8 +19,8 @@ function getTasks() {
             });
 };
 
-function addTask(task) {
-    return db('tasks').insert(task)
+function addTask(task, projectId) {
+    return db('tasks').insert({...task, project_id: projectId})
                          .then(ids => {
                              const id = ids[0];
 

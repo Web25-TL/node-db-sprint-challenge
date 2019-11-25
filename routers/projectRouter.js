@@ -41,8 +41,9 @@ router.post('/', (req, res) => {
 
 router.post('/:id/tasks', validateId, (req, res) => {
     const task = req.body;
+    const { id } = req.params;
 
-    Task.addTask(task)
+    Task.addTask(task, id)
            .then(addedTask => {
                res.status(201).json(addedTask);
            })
