@@ -1,4 +1,5 @@
 const db = require('../db-config.js');
+const mappers = require('./mappers.js');
 
 module.exports = {
     getProjects,
@@ -21,26 +22,30 @@ function getProjects() {
 function getProjectById(id) {
     let query = db('projects');
     let taskQuery = db('tasks');
+    let resourceQuery = db('project_resources as pr');
 
     if(id) {
         query.where({ id }).first(); // gets the project
         taskQuery.where({ project_id: id }); // gets the tasks
+        resourceQuery.join('resources as r', 'pr.resource_id', 'r.id').select('pr.resource_id', 'r.name', 'r.description').where({ project_id: id });
 
-        const promises = [query, taskQuery];
+        const promises = [query, taskQuery, resourceQuery];
 
         return Promise.all(promises)
                       .then(results => {
-                          let [projects, tasks] = results;
+                          let [projects, tasks, resources] = results;
                           
                           if(projects) {
                               projects.tasks = tasks;
-                              return projects;
+                              projects.resources = resources;
+
+                              return mappers.updateProjectBools(projects);
                           } else {
                               return null;
                           }
                       });
     }
-    return query;
+    return query
 };
 
 function addProject(project) {

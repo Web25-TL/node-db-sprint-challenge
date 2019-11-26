@@ -20,8 +20,8 @@ function updateProjectBools(project) {
     };
 
     // code should only run if the project has tasks on it
-    if (project.tasks) {
-        project.tasks = project.tasks.map(task => {
+    if (updatedProject.tasks) {
+        updatedProject.tasks = updatedProject.tasks.map(task => {
             return {
                 ...task,
                 completed: intToBoolean(task.completed), // same as the projects above we can update the tasks completed key to return a true or false instead of a 0 or 1
