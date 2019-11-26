@@ -19,8 +19,29 @@ function getProjects() {
 };
 
 function getProjectById(id) {
-    return db('projects').where({ id }).first()
-}
+    let query = db('projects');
+    let taskQuery = db('tasks');
+
+    if(id) {
+        query.where({ id }).first(); // gets the project
+        taskQuery.where({ project_id: id }); // gets the tasks
+
+        const promises = [query, taskQuery];
+
+        return Promise.all(promises)
+                      .then(results => {
+                          let [projects, tasks] = results;
+                          
+                          if(projects) {
+                              projects.tasks = tasks;
+                              return projects;
+                          } else {
+                              return null;
+                          }
+                      });
+    }
+    return query;
+};
 
 function addProject(project) {
     return db('projects').insert(project)
