@@ -19,6 +19,7 @@ function getProjects() {
             });
 };
 
+// this function will use multiple queries and join them all together to make one JSON object(the project) that has additional properties such as the tasks and the resources
 function getProjectById(id) {
     let query = db('projects');
     let taskQuery = db('tasks');
